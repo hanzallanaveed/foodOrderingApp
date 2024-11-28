@@ -1,0 +1,50 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // You can still use the Flutter Gradle Plugin, but ensure it's after Android and Kotlin plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.food_ordering_app"
+    compileSdk = 33  // Specify the compileSdkVersion directly
+
+    ndkVersion = "23.1.7779620" // You can specify the required NDK version or remove this if it's not needed.
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId = "com.example.food_ordering_app"
+        minSdk = 21  // Specify minimum SDK version directly
+        targetSdk = 33  // Specify target SDK version directly
+        versionCode = 1
+        versionName = "1.0"
+        multiDexEnabled = true  // Enable multidex support if your app is using many dependencies
+    }
+
+    buildTypes {
+        release {
+            // Add your signing configuration here if needed
+            signingConfig = signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+flutter {
+    source = "../.."  // This should be fine as it points to the Flutter source code location
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.multidex:multidex:2.0.1'  // Add multidex support
+    // Add other dependencies as needed for your project
+}
